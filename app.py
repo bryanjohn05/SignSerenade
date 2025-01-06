@@ -114,3 +114,4 @@ hands.close()
 face_mesh.close()
 cv2.destroyAllWindows()
 print("All resources released.")
+#sample comment
