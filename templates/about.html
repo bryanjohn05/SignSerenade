@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About SignSerenade</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/" id="homePage">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <a href="/translate" id="translate">
+            <i class="fas fa-language"></i> Translate
+        </a>
+        <a href="/team" id="team">
+            <i class="fas fa-users"></i> Visit the Team
+        </a>
+    </div>
+    </div>
+    <div class="about-container">
+        <h1 class="animate__animated animate__fadeInDown">About SignSerenade</h1>
+        <p class="animate__animated animate__fadeInUp">
+            SignSerenade is a revolutionary platform designed to bridge the gap between the hearing and deaf communities. 
+            By leveraging cutting-edge technology, including Artificial Intelligence and Machine Learning, 
+            our platform facilitates seamless sign language recognition, translation, and learning.
+        </p>
+
+        <div class="features">
+            <div class="feature-card">
+                <i class="fas fa-language"></i>
+                <h3>Real-Time Translation</h3>
+                <p>
+                    Convert sign language gestures into spoken and written words, breaking barriers in communication.
+                </p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-book-reader"></i>
+                <h3>Interactive Learning</h3>
+                <p>
+                    A learning platform for sign language that offers tutorials, quizzes, and validation of user-performed actions.
+                </p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-brain"></i>
+                <h3>Powered by AI</h3>
+                <p>
+                    Utilizing AI to recognize complex hand gestures with precision and efficiency using Mediapipe and YOLO.
+                </p>
+            </div>
+        </div>
+
+    
+
+        <div class="call-to-action">
+            <button class="btn1" onclick="window.location.href='/translate'">Start Translating Now</button>
+        </div>
+    </div>
+
+    
+</body>
+</html>

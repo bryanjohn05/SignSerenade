@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <title>Translate - SignSerenade</title>
+    <style>
+        /* General Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #4a628a, #223454 100%); /* Gradient background */
+            color: black;
+            display: flex;
+            height: 100vh;   
+            animation: fadeIn 2s ease-out;        
+        }
+
+        h1 {
+            margin: 20px 0;
+            font-size: 2rem;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: linear-gradient(135deg, #4a628a, #223454 100%); /* Gradient background */
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar a {
+            color: black;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        
+        .navbar a:hover {
+            background-color:#4a628a;
+            border-radius: 5%;
+        }
+        
+        .navbar i {
+            margin-right: 8px;
+        }
+
+        /* Section Styling */
+        .container {
+            display: flex;
+            width: 100%;
+            margin-top: 70px; /* To give space below the fixed navbar */
+            flex: 1;
+        }
+
+        .left-section {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .right-section {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Form and Button Styling */
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #c7d7f5;
+            color:black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom:1rem;
+        }
+
+        button:hover {
+            background-color:#4a628a;
+        }
+
+        hr {
+            border: 1px solid #000000;
+            width: 80%;
+            margin: 30px auto;
+        }
+
+        /* Video and Canvas Styling */
+        video, canvas {
+            display: block;
+            margin: 0px auto 3rem auto;
+            border-radius: 10px;
+        }
+
+        #video-feed {
+            max-width: 100%;
+            border: 2px solid #333;
+            border-radius: 5px;
+        }
+
+        #capture-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color:#c7d7f5;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .detected-action {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #c7d7f5;
+        }
+
+        .container {
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 25px;
+            text-align: center;
+        }
+        #action-result {
+        margin-top: 20px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: black;
+}
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/" id="homePage">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <a href="/about" id="aboutUs">
+            <i class="fas fa-info-circle"></i> About Us
+        </a>
+        <a href="/team" id="visitTeam">
+            <i class="fas fa-users"></i> Visit the Team
+        </a>
+    </div>
+
+    <div class="container">
+        <!-- Left Section: Sign Language to Text Translator -->
+        <div class="left-section" id="camera-section">
+            <h1>Sign Language to Text Translator</h1>
+            <button id="startCameraBtn">Start Camera</button>
+            <hr>
+            <img id="video-feed" alt="Video Feed" style="display: none;">
+
+            <div id="action-result">Detected Action: Waiting...</div>
+        </div>
+
+        <!-- Right Section: Text to Sign Language Translator -->
+        <div class="right-section" id="text-to-sign-section">
+            <h1>Text to Sign Language Translator</h1>
+            <form action="/translate" method="POST">
+                <input type="text" name="input_text" placeholder="Enter text to translate" required>
+                <button type="submit">Translate</button>
+            </form>
+            <hr>
+
+            {% if videos %}
+                <h2 style="padding-bottom:1rem;">Translated Sign Videos</h2>
+                <div>
+                    <video id="sign-video" width="450" height="auto" autoplay>
+                        <source id="video-source" src="{{ videos[0] }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        
+        var startCameraBtn = document.getElementById('startCameraBtn');
+        var videoFeed = document.getElementById('video-feed');
+        var actionResult = document.getElementById('action-result');
+        var videoSource = document.getElementById('video-source');
+        var signVideo = document.getElementById('sign-video');
+        var videoList = {{ videos|tojson }}; // Convert Python list to JavaScript array
+        var currentIndex = 0;
+        var stream = null;
+        var actionDetectionInterval = null;
+
+        startCameraBtn.addEventListener('click', async function() {
+            if (stream) {
+                // Stop the camera feed and action detection if already started
+                stream.getTracks().forEach(track => track.stop());
+                videoFeed.style.display = 'none';
+                startCameraBtn.innerText = 'Start Camera';
+                
+                // Clear the action detection interval
+                if (actionDetectionInterval) {
+                    clearInterval(actionDetectionInterval);
+                    actionDetectionInterval = null;
+                }
+                
+                stream = null; // Reset the stream variable
+                actionResult.textContent = 'Detected Action: Waiting...';
+            } else {
+               
+                try {
+                    // Start the camera feed
+                    stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                    videoFeed.srcObject = stream;  // Use srcObject instead of src for local camera stream
+        
+                    // Once the stream is successfully started, display the video and update the button text
+                    videoFeed.style.display = 'block';
+                    startCameraBtn.innerText = 'Stop Camera';
+                    console.log('Camera started');
+                    
+                    // Set the src of the video feed to the Flask video feed stream
+                    videoFeed.src = "{{ url_for('video_feed') }}";  // Stream frames from Flask backend
+                    
+                    // Start continuous action detection
+                    actionDetectionInterval = setInterval(detectAction, 3000);
+                } catch (error) {
+                    // Handle any errors that occur when trying to access the camera
+                    console.error('Error accessing camera: ', error);
+                    actionResult.textContent = 'Error: Unable to access camera.';
+                }
+            }
+        });
+
+        function detectAction() {
+            const canvas = document.createElement('canvas');
+            canvas.width = videoFeed.videoWidth || videoFeed.width;
+            canvas.height = videoFeed.videoHeight || videoFeed.height;
+            canvas.getContext('2d').drawImage(videoFeed, 0, 0);
+
+            // Convert canvas to blob
+            canvas.toBlob(function(blob) {
+                const formData = new FormData();
+                formData.append('file', blob, 'capture.jpg');
+
+                fetch('/classify_action', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    actionResult.textContent = 'Detected Action: ' + data.action;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    actionResult.textContent = 'Error in classification';
+                });
+            }, 'image/jpeg');
+        }
+
+        signVideo.onended = function() {
+            currentIndex++;
+            if (currentIndex < videoList.length) {
+                videoSource.src = videoList[currentIndex];
+                signVideo.load();
+                signVideo.play();
+            } else {
+                // Hide the video and heading after all videos are played
+                signVideo.style.display = 'none';
+                document.querySelector('h2').style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

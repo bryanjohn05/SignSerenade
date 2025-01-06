@@ -1,0 +1,238 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #4a628a, #223454 100%); /* Gradient background */
+    color: black;
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Container */
+/* .container {
+    animation: fadeIn 2s ease-out;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+} */
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(135deg, #4a628a, #223454 100%); /* Gradient background */
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar a {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.navbar a:hover {
+    background-color:#4a628a;
+    border-radius: 5%;
+}
+
+.navbar i {
+    margin-right: 8px;
+}
+.btn i {
+    margin-right: 8px;
+}
+
+/* Header */
+h1 {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    color: black; /* Darker green */
+    animation: slideUp 1.5s ease-out;
+}
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: black; /* Forest green */
+}
+
+/* Button Styles */
+.buttons {
+    display: flex;
+    justify-content: space-around; /* Center buttons with spacing */
+    align-items: center;
+    margin-top: 3rem;
+    gap: 2rem;
+}
+
+.btn {
+    text-align: center;
+    align-items: center;
+    background-color: #c7d7f5; /* Darker forest green */
+    color: black;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between icon and text */
+}
+
+/* Hover Effects */
+.btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+    background-color:#4a628a; /* Lighter forest green */
+    color: white;
+}
+.btn i {
+    font-size: 1.4rem; /* Icon size */
+}
+
+button {
+    padding: 10px 20px;
+    background-color:#c7d7f5;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color:#4a628a; /* Lighter forest green */
+    color: white;
+}
+hr {
+    border: 1px solid #000000;
+    width: 80%;
+    margin: 30px auto;
+}
+
+.icon {
+    font-size: 24px;
+    margin-right: 8px;
+}
+
+.navbar a:hover {
+    background: #4a628a;
+}
+
+/* About Container */
+.about-container {
+    padding-top: 30 rem;
+    /* padding: 150px 20px 50px; */
+}
+
+.about-container h1 {
+    font-size: 3.5rem;
+    color: black;
+    margin-bottom: 20px;
+}
+
+.about-container p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 20px;
+}
+
+/* Feature Cards */
+.features {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 50px 0;
+    gap: 30px;
+}
+
+.feature-card {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+
+.feature-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+}
+
+.feature-card i {
+    font-size: 3rem;
+    color: #B7E0FF;
+    margin-bottom: 10px;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.feature-card p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+
+/* Call-to-Action */
+.call-to-action {
+    margin-top: 30px;
+    align-items: center;
+}
+
+.btn1{
+    text-align: center;
+    align-items: center;
+    background-color: #c7d7f5; 
+    color: black;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+}
+
+.btn1:hover{
+    background-color:#4a628a; /* Lighter forest green */
+    color: white;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes slideUp {
+    0% { transform: translateY(50px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}

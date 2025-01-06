@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Learn Sign Language</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #4a628a, #223454 100%); /* Gradient background */
+            color: black;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: linear-gradient(135deg, #4a628a, #223454 100%); /* Gradient background */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar a {
+            color: black;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color:#4a628a;
+            border-radius: 5%;
+        }
+
+        .container {
+            padding: 5 rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            margin-top:4rem;
+        }
+        
+
+        .video-container {
+            margin: 20px 0;
+        }
+
+        video {
+            width: 100%;
+            max-width: 450px;
+            border: 2px solid #333;
+        }
+
+        .quiz-section {
+            margin-top: 30px;
+        }
+
+        .quiz-options {
+            list-style: none;
+            padding: 0;
+        }
+
+        .quiz-options li {
+            display: inline-block;
+            margin: 10px 0;
+            gap: 7rem;
+        }
+
+        .quiz-options button {
+            background-color: #c7d7f5;
+            color: black;
+            border: none;
+            margin:1rem;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .quiz-options button:hover {
+            background-color: #4a628a;
+        }
+
+        .message {
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+
+        .button-container {
+            margin-top: 2px;
+        }
+
+        .button-container a {
+            background-color: #c7d7f5;
+            color: black;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        .button-container a:hover {
+            background-color:#4a628a;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="/" id="homePage">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <a href="/learn" id="aboutUs">
+            <i class="fas fa-book-open"></i> Learning Platform
+        </a>
+        <a href="/validate" id="visitTeam">
+            <i class="fas fa-users"></i> Validation
+        </a>
+    </div>
+
+    <div class="container">
+        <h1>Learn Sign Language</h1>
+
+        <div class="video-container">
+            <video id="signVideo" controls autoplay loop>
+                <source src="static/signs/Are.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <div class="quiz-section">
+            <h2>Quiz: What is this sign?</h2>
+            <div class="message" id="quizMessage"></div>
+            <ul class="quiz-options" id="quizOptions">
+                <!-- Quiz options will be added here dynamically -->
+            </ul>
+        </div>
+
+        <div class="button-container">
+            <a href="javascript:void(0)" id="nextLessonBtn">Next Lesson</a>
+        </div>
+    </div>
+
+    <script>
+        const signVideos = {
+            "Are": "static/signs/Are.mp4",
+            "Can": "static/signs/Can.mp4",
+            "Come": "static/signs/Come.mp4",
+            "Dont": "static/signs/Dont.mp4",
+            "Going": "static/signs/Going.mp4",
+            "Hello": "static/signs/Hello.mp4",
+            "Help": "static/signs/Help.mp4",
+            "Here": "static/signs/Here.mp4",
+            "How": "static/signs/How.mp4",
+            "I": "static/signs/I.mp4",
+            "Name": "static/signs/Name.mp4",
+            "Need": "static/signs/Need.mp4",
+            "Please": "static/signs/Please.mp4",
+            "Thanks": "static/signs/Thanks.mp4",
+            "This": "static/signs/This.mp4",
+            "Today": "static/signs/Today.mp4",
+            "Understand": "static/signs/Understand.mp4",
+            "What": "static/signs/What.mp4",
+            "Where": "static/signs/Where.mp4",
+            "You": "static/signs/You.mp4",
+            "Your": "static/signs/Your.mp4"
+        };
+    
+        const quizOptions = Object.keys(signVideos);
+        let currentSign = "Hello"; // Always start with "Hello"
+        let quizInProgress = true;
+    
+        function getRandomOptions(correctOption) {
+            const options = [correctOption];
+            while (options.length < 4) {
+                const randomOption = quizOptions[Math.floor(Math.random() * quizOptions.length)];
+                if (!options.includes(randomOption)) {
+                    options.push(randomOption);
+                }
+            }
+            return options.sort(() => Math.random() - 0.5); // Shuffle options
+        }
+    
+        function loadQuiz() {
+            const message = document.getElementById('quizMessage');
+            const optionsList = document.getElementById('quizOptions');
+            optionsList.innerHTML = '';
+            message.textContent = 'Choose the correct sign for the word displayed';
+    
+            const options = getRandomOptions(currentSign);
+    
+            options.forEach(option => {
+                const li = document.createElement('li');
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.onclick = () => checkAnswer(option);
+                li.appendChild(button);
+                optionsList.appendChild(li);
+            });
+        }
+    
+        function checkAnswer(selected) {
+            const message = document.getElementById('quizMessage');
+            if (selected === currentSign) {
+                message.textContent = "Correct! You got it right!";
+            } else {
+                message.textContent = `Wrong! The correct answer was "${currentSign}".`;
+            }
+            quizInProgress = false;
+            document.getElementById('nextLessonBtn').style.display = 'block';
+        }
+    
+        document.getElementById('nextLessonBtn').onclick = function () {
+            if (quizInProgress) {
+                alert("Please complete the quiz first!");
+                return;
+            }
+            currentSign = quizOptions[Math.floor(Math.random() * quizOptions.length)];
+            document.getElementById('signVideo').src = signVideos[currentSign];
+            quizInProgress = true;
+            loadQuiz();
+            document.getElementById('nextLessonBtn').style.display = 'none';
+        };
+    
+        // Initialize the lesson and quiz with "Hello"
+        document.getElementById('signVideo').src = signVideos["Hello"]; // Explicitly set "Hello" as the initial video
+        loadQuiz();
+    </script>
+    
+</body>
+</html>
