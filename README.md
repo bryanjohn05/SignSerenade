@@ -46,9 +46,11 @@ Sanchia Lara Dsouza
    git clone https://github.com/YourUsername/SignSerenade.git
    cd SignSerenade
 2. Install dependencies:
-  pip install -r requirements.txt
+   ```bash
+   pip install -r requirements.txt
 3. Run the Flask app:
-  python app.py
+   ```bash
+   python app.py
 
 
 ## Future Scope
