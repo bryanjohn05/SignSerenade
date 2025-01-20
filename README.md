@@ -60,5 +60,6 @@ Enhance real-time performance for faster translations.
 Integrate AI for contextual translation accuracy.
 
 
-Acknowledgments
+## Acknowledgments
+
 We thank our mentors, peers, and everyone who supported us in building SignSerenade. Special thanks to the creators of YOLOv11, WLASL, and MediaPipe for their open-source tools.
