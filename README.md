@@ -1,4 +1,4 @@
-# SignSerenade: Your Voice in Signs  
+# SignSerenade: Your Voice in Signs  (In Development)
 SignSerenade is a web application that bridges the communication gap between Deaf and hearing communities. It provides real-time sign language translation, text-to-sign conversion, and an interactive learning module. By leveraging cutting-edge technologies like YOLOv11 and WLASL, the project aims to promote inclusivity and accessibility.  
 
 ---
