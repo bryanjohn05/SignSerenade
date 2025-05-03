@@ -25,6 +25,7 @@ def debug_results(model_path, verbose=True):
     try:
         # Load the model
         model = YOLO(model_path)
+        model.export(format='pt')
         
         if verbose:
             print("Model loaded successfully")
