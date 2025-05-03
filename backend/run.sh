@@ -1,13 +1,14 @@
 #!/bin/bash
-# Script to run the Flask backend on port 8000
+# Script to run the Flask backend on Render
 
 # Set the model path environment variable
 export MODEL_PATH=best.pt
-# Set the port
-export PORT=8000
 
-# Install dependencies if needed
+# Use PORT from Render (Render sets this automatically)
+export PORT=${PORT:-8000}
+
+# Install dependencies
 pip install -r requirements.txt
 
-# Run the Flask app
-python app.py
+# Run the Flask app using Gunicorn (better for production)
+exec gunicorn -w 4 -b 0.0.0.0:$PORT app:app
