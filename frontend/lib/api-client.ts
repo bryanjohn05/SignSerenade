@@ -1,6 +1,6 @@
 // API client for communicating with the Python backend
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
+const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL|| "http://localhost:3000"
 import { textToSignVideos, getSignVideoPath } from "./video-utils"
 
 export async function translateText(text: string): Promise<string[]> {

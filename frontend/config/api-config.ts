@@ -58,7 +58,7 @@ export const API_CONFIG = {
     classifyAction: "/classify_action",
     translate: "/translate",
     validate: "/validate",
-    // quiz: "/quiz",
+    quiz: "/quiz",
     learn: "/learn",
     detect: "/detect",
     health: "/health", // Add explicit health endpoint
