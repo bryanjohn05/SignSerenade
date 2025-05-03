@@ -41,11 +41,11 @@ const getApiBaseUrl = () => {
     }
 
     // If we're in the browser and no env var is set, use localhost:8000
-    return process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+    return process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000"
   }
 
   // Server-side fallback
-  return process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+  return process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000"
 }
 
 export const API_CONFIG = {
