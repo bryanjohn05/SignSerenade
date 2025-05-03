@@ -30,6 +30,7 @@ export default function QuizPage() {
       const videoPath = getSignVideoPath(correctSign)
 
       if (videoPath) {
+        // setVideoError(false)
         setCurrentSign(correctSign)
         setVideoPath(videoPath)
         setQuizOptions(selected)
@@ -84,12 +85,19 @@ export default function QuizPage() {
   // Handle video error
   const handleVideoError = () => {
     console.error("Error loading video:", videoPath)
-    setVideoError(true)
+    if (generateFallbackQuiz()) {
+      // we have a fresh videoPath, so clear the error
+      setVideoError(false)
+    } else {
+      setError("Could not load video. Please try again later.")
+      setVideoError(true)
+    }
+    // setVideoError(true)
 
     // Try to generate a fallback quiz
-    if (!generateFallbackQuiz()) {
-      setError("Could not load video. Please try again later.")
-    }
+    // if (!generateFallbackQuiz()) {
+    //   setError("Could not load video. Please try again later.")
+    // }
   }
 
   // Check the selected answer
@@ -168,13 +176,24 @@ export default function QuizPage() {
                   </div>
                 ) : (
                   <video
+                    key={videoPath} 
                     ref={videoRef}
                     className="mx-auto rounded-lg border-2 border-gray-200 shadow-md max-w-full w-[450px]"
                     controls
                     autoPlay
                     loop
                     src={videoPath}
-                    onError={handleVideoError}
+                    // onError={handleVideoError}
+                    onError={() => {
+                      if (generateFallbackQuiz()) {
+                        setVideoError(false)
+                        // new videoPath will remount the <video> and clear videoError
+                      } else {
+                        setVideoError(true)
+                        setError("Could not load video…")
+                      }
+                    }}
+                    onLoadedData={() => setVideoError(false)}
                   >
                     Your browser does not support the video tag.
                   </video>
