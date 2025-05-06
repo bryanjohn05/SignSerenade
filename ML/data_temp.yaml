@@ -1,0 +1,26 @@
+names:
+- Are
+- Can
+- Come
+- Dont
+- Going
+- Hello
+- Help
+- Here
+- How
+- I
+- Name
+- Need
+- Please
+- Thanks
+- This
+- Today
+- Understand
+- What
+- Where
+- You
+- Your
+nc: 21
+test: Data\test
+train: Data\train
+val: Data\val
