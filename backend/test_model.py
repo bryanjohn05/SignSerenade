@@ -4,7 +4,7 @@ import numpy as np
 import os
 
 def test_model():
-    model_path = os.environ.get('MODEL_PATH', 'best.pt')
+    model_path = os.environ.get('MODEL_PATH', 'best(4).pt')
     print(f"Testing model loading from {model_path}")
     
     try:

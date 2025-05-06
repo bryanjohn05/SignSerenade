@@ -6,7 +6,7 @@
 
 If you see an error like "Error loading model" or "Model not loaded":
 
-- Make sure the `best.pt` file exists in the backend directory
+- Make sure the `best(4).pt` file exists in the backend directory
 - Check that you have enough RAM to load the model
 - Try running the `test_model.py` script to isolate model loading issues
 

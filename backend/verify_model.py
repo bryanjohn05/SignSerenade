@@ -145,7 +145,7 @@ def verify_model(model_path, verbose=True):
 
 def main():
     parser = argparse.ArgumentParser(description='Verify YOLO model loading and inference')
-    parser.add_argument('--model', default='best.pt', help='Path to the YOLO model file')
+    parser.add_argument('--model', default='best(4).pt', help='Path to the YOLO model file')
     parser.add_argument('--quiet', action='store_true', help='Suppress verbose output')
     
     args = parser.parse_args()

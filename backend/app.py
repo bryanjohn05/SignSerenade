@@ -33,7 +33,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Global variables
 model = None
-model_path = os.environ.get('MODEL_PATH', 'best.pt')
+model_path = os.environ.get('MODEL_PATH', 'best(4).pt')
 model_loading = False
 model_error = None
 

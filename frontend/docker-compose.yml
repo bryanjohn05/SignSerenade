@@ -19,7 +19,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./backend/best.pt:/app/best.pt
+      - ./backend/best(4).pt:/app/best(4).pt
     environment:
-      - MODEL_PATH=best.pt
+      - MODEL_PATH=best(4).pt
       - PORT=3000

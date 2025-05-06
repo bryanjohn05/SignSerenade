@@ -29,7 +29,7 @@ export default function DetectionDebugger() {
   const [detectionResult, setDetectionResult] = useState<any>(null)
   const [isDetecting, setIsDetecting] = useState(false)
   const [isReloadingModel, setIsReloadingModel] = useState(false)
-  const [modelPath, setModelPath] = useState<string>("best.pt");
+  const [modelPath, setModelPath] = useState<string>("best(4).pt");
   const [versionInfo, setVersionInfo] = useState<any>(null)
 
   // Fetch model info

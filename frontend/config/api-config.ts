@@ -63,6 +63,6 @@ export const API_CONFIG = {
     detect: "/detect",
     health: "/health", // Add explicit health endpoint
   },
-  modelPath: "best.pt", // Path to the YOLO model
+  modelPath: "best(4).pt", // Path to the YOLO model
   modelVersion: "YOLOv11m", // Update to match your model version
 }

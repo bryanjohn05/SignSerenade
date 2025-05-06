@@ -2,7 +2,7 @@
 # Script to run the Flask backend on Render
 
 # Set the model path environment variable
-export MODEL_PATH=best.pt
+export MODEL_PATH=best(4).pt
 
 # Use PORT from Render (Render sets this automatically)
 export PORT=${PORT:-8000}

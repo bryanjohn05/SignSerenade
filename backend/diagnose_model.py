@@ -192,7 +192,7 @@ def check_memory():
 
 def main():
     parser = argparse.ArgumentParser(description='Diagnose YOLO model loading issues')
-    parser.add_argument('--model', default='best.pt', help='Path to the YOLO model file')
+    parser.add_argument('--model', default='best(4).pt', help='Path to the YOLO model file')
     
     args = parser.parse_args()
     

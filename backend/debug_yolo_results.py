@@ -104,7 +104,7 @@ def debug_results(model_path, verbose=True):
 
 def main():
     parser = argparse.ArgumentParser(description='Debug YOLO model results structure')
-    parser.add_argument('--model', default='best.pt', help='Path to the YOLO model file')
+    parser.add_argument('--model', default='best(4).pt', help='Path to the YOLO model file')
     parser.add_argument('--quiet', action='store_true', help='Suppress verbose output')
     
     args = parser.parse_args()

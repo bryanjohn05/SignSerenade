@@ -21,7 +21,7 @@ A comprehensive sign language learning platform built with Next.js and Python, f
 
 ### Option 1: Running with Docker Compose
 
-1. Place your YOLO model file (`best.pt`) in the `backend` directory
+1. Place your YOLO model file (`best(4).pt`) in the `backend` directory
 2. Run the application:
    \`\`\`bash
    docker-compose up
@@ -55,7 +55,7 @@ A comprehensive sign language learning platform built with Next.js and Python, f
    \`\`\`bash
    pip install -r requirements.txt
    \`\`\`
-3. Place your YOLO model file (`best.pt`) in the backend directory
+3. Place your YOLO model file (`best(4).pt`) in the backend directory
 4. Start the Flask server:
    \`\`\`bash
    python app.py

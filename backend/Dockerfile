@@ -16,7 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Set environment variables
-ENV MODEL_PATH=best.pt
+ENV MODEL_PATH=best(4).pt
 ENV PORT=3000
 
 # Expose the port
