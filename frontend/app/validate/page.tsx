@@ -325,6 +325,7 @@ export default function ValidatePage() {
                     <div className="w-full max-w-md">
                       <video
                         ref={videoRef}
+                        style={{ transform: "scaleX(-1)" }}
                         className="w-full rounded-lg border-2 border-gray-200 shadow-md"
                         autoPlay
                         loop
@@ -362,8 +363,8 @@ export default function ValidatePage() {
               <div className="flex flex-col items-center">
                 <div className="relative w-full aspect-video bg-black/10 rounded-xl overflow-hidden shadow-lg">
                   <div className="relative w-full h-full">
-                    <video ref={cameraVideoRef} className="w-full h-full object-cover absolute top-0 left-0" autoPlay playsInline muted />
-                    <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full pointer-events-none" />
+                    <video ref={cameraVideoRef} className="w-full h-full object-cover  absolute top-0 left-0" autoPlay playsInline style={{ transform: "scaleX(-1)" }} muted />
+                    <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full pointer-events-none" style={{ transform: "scaleX(-1)" }}/>
                   </div>
                 </div>
                 <motion.div className="mt-6 text-xl font-semibold" animate={{ scale: validationResult !== null ? [1, 1.1, 1] : 1, transition: { duration: 0.5 } }}>

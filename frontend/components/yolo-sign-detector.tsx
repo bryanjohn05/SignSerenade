@@ -299,8 +299,8 @@ export default function YoloSignDetector() {
             <div className="relative aspect-video bg-black rounded-lg overflow-hidden">
               {isActive ? (
                 <>
-                  <video ref={videoRef} className="w-full h-full object-cover" autoPlay playsInline muted />
-                  <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full" />
+                  <video ref={videoRef} className="w-full h-full object-cover" style={{ transform: "scaleX(-1)" }} autoPlay playsInline muted />
+                  <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full" style={{ transform: "scaleX(-1)" }} />
                   {isProcessing && (
                     <div className="absolute top-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded-full">
                       Processing...
